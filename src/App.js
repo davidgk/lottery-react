@@ -3,6 +3,7 @@ import web3 from './web3';
 import lottery from './lottery';
 import {Component} from "react";
 import "./App.css"
+import SubtitleInfo from "./components/subtitleInfo";
 
 class App extends Component{
     state = {
@@ -61,16 +62,10 @@ class App extends Component{
     }
 
     render () {
-        let balance = web3.utils.fromWei(this.state.balance, 'ether');
         return (
             <div className="App">
                 <h2>Lottery Contract</h2>
-                <p>
-                    This contract is managed by {this.state.manager}.
-                </p>
-                <p>
-                    There are currently {this.state.players.length} people entered, competing to win {balance} ethers!.
-                </p>
+                <SubtitleInfo balance={this.state.balance} manager={this.state.manager} players={this.state.players}/>
                 <hr />
                 <form onSubmit={this.onSubmit}>
                     <h4>Want to try your luck?</h4>
