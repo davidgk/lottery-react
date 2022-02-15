@@ -1,4 +1,9 @@
-# Getting Started with Create React App
+# Lottery react
+
+This project consumes the lottery smart contract as backend 
+So interacts with Ethereum network
+
+Now the things configured are a contract deployed in rinkeby test network
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
