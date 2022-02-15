@@ -36,12 +36,18 @@ class App extends Component{
         let value = web3.utils.toWei(this.state.value, 'ether');
         this.setState({message: 'Waiting on transaction success...'})
         // this line taks in real world 15''
-        await lottery.methods.enter().send({
-            from: accounts[0],
-            value
+        try {
+            await lottery.methods.enter().send({
+                from: accounts[0],
+                value
             });
-        this.setState({message: 'You have been entered!'})
-        await this.setPlayersAndBalance();
+            this.setState({message: 'You have been entered!'})
+            await this.setPlayersAndBalance();
+        } catch (e) {
+            console.log(e)
+            this.setState({message: 'Transaction Fail: ' +  e.message + "; please, try again!"})
+        }
+
     }
 
     pickAWinner = async () =>  {
@@ -70,7 +76,7 @@ class App extends Component{
                 <form onSubmit={this.onSubmit}>
                     <h4>Want to try your luck?</h4>
                     <div>
-                        <label>Amount of ether to enter: </label>
+                        <label>Amount of ether to enter (use a dot instead a comma to use decimals): </label>
                         <input
                             value={this.state.value}
                             onChange={event => this.setState({value: event.target.value})}
